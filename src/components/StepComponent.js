@@ -1,14 +1,15 @@
 // @flow
 import { useEffect, useRef, useState } from 'react';
 import color from 'styles/color';
+import CheckImg from 'assets/images/check.png';
 
 type Props = {
 	steps: Array<string>, // Step 별 텍스트를 배열로 넘겨야함
 	curStep: number, // 현재 Step 몇단계인지
-	size: number, // Step을 나타내는 원의 크기
+	circleSize: number, // Step을 나타내는 원의 크기
 };
 
-const StepComponent = ({ steps, curStep, size }) => {
+const StepComponent = ({ steps, curStep, circleSize }) => {
 	return (
 		<div
 			style={{
@@ -28,7 +29,7 @@ const StepComponent = ({ steps, curStep, size }) => {
 						curStep={curStep}
 						idx={idx}
 						length={steps.length}
-						size={size}
+						size={circleSize}
 					/>
 				))}
 		</div>
@@ -54,7 +55,6 @@ const StepCircle = ({ txt, curStep, idx, length, size }) => {
 		if (circleRef && circleRef.current && txtRef && txtRef.current) {
 			const rect = circleRef.current.getBoundingClientRect();
 			const txtRect = txtRef.current.getBoundingClientRect();
-			console.log(txtRect.width);
 			setTxtLeft(rect.width / 2 - txtRect.width / 2 - 3);
 		}
 	}, [circleRef, txtRef]);
@@ -86,7 +86,20 @@ const StepCircle = ({ txt, curStep, idx, length, size }) => {
 						fontSize: '20px',
 					}}
 				>
-					{isComplete ? '완료' : isSelected ? `${idx + 1}` : ''}
+					{isComplete ? (
+						<img
+							src={CheckImg}
+							style={{
+								width: `${size / 2}px`,
+								verticalAlign: 'middle',
+								marginTop: -5,
+							}}
+						/>
+					) : isSelected ? (
+						`${idx + 1}`
+					) : (
+						''
+					)}
 				</div>
 				<div
 					ref={txtRef}
