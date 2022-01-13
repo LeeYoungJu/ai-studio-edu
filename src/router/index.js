@@ -1,16 +1,13 @@
 // @flow
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { connect } from 'react-redux';
 import PrivateRouter from './PrivateRouter';
 import ROUTES from 'constants/router';
 
 const LoginContainer = lazy(() => import('pages/login/LoginContainer'));
 const HomePage = lazy(() => import('pages/home'));
 
-type Props = {};
-
-const RouterIndex = ({}: Props) => {
+const RouterIndex = ({}) => {
 	return (
 		<Suspense fallback={<div>Loading.....</div>}>
 			<Routes>

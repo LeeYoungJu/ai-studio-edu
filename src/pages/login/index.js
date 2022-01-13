@@ -1,19 +1,14 @@
 // @flow
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ROUTES from 'constants/router';
 
-const LoginPage = ({}) => {
+type Props = {
+	handleLogin: (id: string, pwd: string) => void,
+};
+
+const LoginPage = ({ handleLogin }: Props) => {
 	const [userId, setUserId] = useState('');
 	const [userPwd, setUserPwd] = useState('');
-
-	const navigate = useNavigate();
-
-	const handleLogin = (e) => {
-		e.preventDefault();
-		navigate(ROUTES.HOME);
-	};
 
 	return (
 		<>
@@ -29,7 +24,12 @@ const LoginPage = ({}) => {
 				>
 					<div>Surromind</div>
 					<div>Welcome Back, Please login to your account</div>
-					<form onSubmit={handleLogin}>
+					<form
+						onSubmit={(e) => {
+							e.preventDefault();
+							handleLogin(userId, userPwd);
+						}}
+					>
 						<div>
 							<input
 								type="text"

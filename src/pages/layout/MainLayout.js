@@ -36,7 +36,9 @@ const MainLayout = ({ children, isLeftNavShow, style }: Props) => {
 	);
 };
 
-const MainWrapper = styled.div``;
+const MainWrapper = styled.div`
+	max-width: 1500px;
+`;
 
 const ContentWrapper = styled.div`
 	${({ leftMargin }) => `margin-left: ${leftMargin}px;`}
